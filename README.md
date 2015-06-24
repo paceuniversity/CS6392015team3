@@ -1,6 +1,6 @@
 # CS6392015team3
 
-#Proposal
+##Proposal
 
 All Android phones come with a built in Image Viewer of some kind. In most cases, it is the standard Google app, Google Photos. This app, and many others like it, is very well built and a solid choice for regular users. However, some users do not wish to put their photos into the hands of Google, or other large corporations, due to privacy concerns. In order to alleviate these issues, while still providing the same functionality, we propose to create an Image Viewing Gallery Application.
 
