@@ -1,6 +1,6 @@
 # CS6392015team3
 
-##Link To Pop Prototype
+##Link To Pop Prototype (6/26/2015)
 
 https://popapp.in/w/projects/558e1d847791e90a664cccef/preview
 
