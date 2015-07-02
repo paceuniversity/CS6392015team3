@@ -1,11 +1,14 @@
 package com.privatestock.task;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.privatestock.R;
 
@@ -15,13 +18,22 @@ import java.net.URL;
 
 public class ImageDownloader extends AsyncTask<String, Integer, Bitmap> {
 
-    private static final String EX_REPO = "";
+    private static final String EXAMPLE_REPO =
+            "https://raw.githubusercontent.com/paceuniversity/CS6392015team3/master/img_repo/";
+    private static final String EXAMPLE_EXT = ".jpg";
 
-    private View context = null;
+    private View view = null;
+    private Context appContext;
     private String imageUrl;
 
-    public ImageDownloader(View context) {
-        this.context = context;
+    public ImageDownloader(View view) {
+        this.view = view;
+        this.appContext = null;
+    }
+
+    public ImageDownloader(View view, Context appContext) {
+        this.view = view;
+        this.appContext = appContext;
     }
 
     @Override
@@ -54,14 +66,18 @@ public class ImageDownloader extends AsyncTask<String, Integer, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap img) {
-        ImageView imageView = (ImageView) context.findViewById(R.id.resultImageView);
+        ImageView imageView = (ImageView) view.findViewById(R.id.resultImageView);
+        TextView noImageTextView = (TextView) view.findViewById(R.id.noImageTextView);
 
         if (imageView != null && img != null) {
+            noImageTextView.setText("");
             imageView.setImageBitmap(img);
+        } else {
+            noImageTextView.setText("No Image Found. Please Try Again.");
         }
     }
 
     public void setImageName(String imageName) {
-        this.imageUrl = imageUrl;
+        this.imageUrl = EXAMPLE_REPO + imageName.toLowerCase().replaceAll(" ", "_") + EXAMPLE_EXT;
     }
 }

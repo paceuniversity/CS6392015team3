@@ -19,8 +19,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_refresh_black"
         android:layout_gravity="bottom|end"
-        app:elevation="10dp"
+        app:elevation="6dp"
         app:pressedTranslationZ="12dp"
+        app:borderWidth="0dp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/imageFeedListView"
         android:layout_alignEnd="@+id/imageFeedListView" />

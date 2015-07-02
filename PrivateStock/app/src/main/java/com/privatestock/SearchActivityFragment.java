@@ -2,11 +2,11 @@ package com.privatestock;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.privatestock.task.ImageDownloader;
@@ -15,10 +15,11 @@ import com.privatestock.task.ImageDownloader;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SearchActivityFragment extends Fragment {
+public class SearchActivityFragment extends Fragment implements View.OnClickListener {
 
     private EditText searchEditText;
-    private ImageDownloader imageDownloader;
+    private Button searchButton;
+    View view;
 
     public SearchActivityFragment() {
     }
@@ -26,26 +27,39 @@ public class SearchActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        view = inflater.inflate(R.layout.fragment_search, container, false);
 
         searchEditText = (EditText) view.findViewById(R.id.searchQuery);
-        imageDownloader = new ImageDownloader(view);
+        searchButton = (Button) view.findViewById(R.id.searchButton);
 
-        searchEditText.addTextChangedListener(new TextWatcher() {
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                searchForImage(s.toString());
-            }
-        });
+        searchButton.setOnClickListener(this);
 
         return view;
     }
 
-    private void searchForImage(String query) {
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.searchButton)
+            searchForImage();
+    }
 
+    private void searchForImage() {
+        String query = this.searchEditText.getText().toString();
+
+        ImageDownloader imageDownloader = new ImageDownloader(view, getActivity().getApplicationContext());
+        imageDownloader.setImageName(query);
+        imageDownloader.execute();
+
+        hideKeyboard();
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager)
+                getActivity().getSystemService(
+                        getActivity().getApplicationContext().INPUT_METHOD_SERVICE);
+
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),
+                InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
 }

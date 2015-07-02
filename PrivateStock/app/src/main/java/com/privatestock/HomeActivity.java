@@ -1,5 +1,6 @@
 package com.privatestock;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +40,9 @@ public class HomeActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_search) {
+            Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(searchIntent);
         }
 
         return super.onOptionsItemSelected(item);
