@@ -1,5 +1,9 @@
 # CS6392015team3
 
+##Link to Presentation (7/2/2015)
+
+https://github.com/paceuniversity/CS6392015team3/raw/master/Presentation.pptx
+
 ##Link To Pop Prototype (6/26/2015)
 
 https://popapp.in/w/projects/558e1d847791e90a664cccef/preview
